@@ -16,10 +16,6 @@ public class CompetitionsAdapter(HttpClient httpClient) : ICompetitionsAdapter
 
     public async Task<IReadOnlyCollection<Competition>> GetCompetitionsAsync()
     {
-        Console.WriteLine(httpClient.BaseAddress);
-        var testResponse = await httpClient.GetAsync("competitions");
-        
-        var test123 = await testResponse.Content.ReadAsStringAsync();
         var response = await httpClient.GetFromJsonAsync<IReadOnlyCollection<Competition>>("competitions");
         return response ?? Array.Empty<Competition>();
     }

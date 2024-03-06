@@ -4,7 +4,7 @@ using OneOf;
 
 namespace Domain.Competitions;
 
-public interface ICompetitionsAdapter
+public interface ICompetitionsAdapter : IWhaleApiAdapter
 {
     public Task<OneOf<Competition, AlreadyExists>> CreateCompetitionAsync(CreateCompetition createCompetition);
     

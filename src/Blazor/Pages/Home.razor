@@ -1,7 +1,33 @@
 ﻿@page "/"
+@using global::Domain.Users
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
+<input type="text" @bind="Email" />
+<input type="text" @bind="Password" />
+
+<button type="button" class="btn btn-primary" @onclick="Register">Register user</button>
+<button type="button" class="btn btn-primary" @onclick="Login">Login user</button>
+
 Welcome to your new app.
+
+@code
+{
+    [Inject]
+    public IUsersAdapter UsersAdapter { get; set; }
+    
+    public string Email { get; set; }
+    public string Password { get; set; }
+    
+    private async Task Register()
+    {
+        await UsersAdapter.RegisterUserAsync(Email, Password);
+    }
+
+    private async Task Login()
+    {
+        await UsersAdapter.LoginUserAsync(Email, Password);
+    }
+}
