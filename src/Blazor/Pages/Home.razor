@@ -1,5 +1,7 @@
 ﻿@page "/"
-@using global::Domain.Users
+@using MediatR
+@using Application.Users.Commands.LoginUser
+@using Application.Users.Commands.RegisterUser
 
 <PageTitle>Home</PageTitle>
 
@@ -11,23 +13,41 @@
 <button type="button" class="btn btn-primary" @onclick="Register">Register user</button>
 <button type="button" class="btn btn-primary" @onclick="Login">Login user</button>
 
+@if(ValidationErrors.Any())
+{
+    <div class="alert alert-danger">
+        @foreach(var error in ValidationErrors)
+        {
+            <p>@error</p>
+        }
+    </div>
+}
+
 Welcome to your new app.
 
 @code
 {
     [Inject]
-    public IUsersAdapter UsersAdapter { get; set; }
+    public ISender sender { get; set; }
     
     public string Email { get; set; }
     public string Password { get; set; }
     
+    public List<string> ValidationErrors { get; set; } = [];
+    
     private async Task Register()
     {
-        await UsersAdapter.RegisterUserAsync(Email, Password);
+        ValidationErrors.Clear();
+        var registerUserOneOf = await sender.Send(new RegisterUserCommand(Email, Password));
+
+        registerUserOneOf.Switch(
+            success => Console.WriteLine("User registered"),
+            error => ValidationErrors = error
+        );
     }
 
     private async Task Login()
     {
-        await UsersAdapter.LoginUserAsync(Email, Password);
+        await sender.Send(new LoginUserCommand(Email, Password));
     }
 }

@@ -1,1 +1,13 @@
 ﻿/src/Blazor/obj/
+/src/Blazor/bin/
+/src/Blazor/.idea/
+/src/Blazor/.vs/
+
+/src/Application/bin/
+/src/Application/obj/
+
+/src/Adapter/bin/
+/src/Adapter/obj/
+
+/src/Domain/bin/
+/src/Domain/obj/
