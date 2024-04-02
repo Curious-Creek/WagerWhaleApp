@@ -1,0 +1,18 @@
+﻿@using global::Domain.Errors
+@using Blazor.ViewModels.ErrorViewModel
+@using System.ComponentModel.DataAnnotations
+
+<Alert Color="AlertColorInstance">
+    <h4>@DomainErrorViewModel.Title [@DomainErrorViewModel.Status]</h4>
+    <p>@DomainErrorViewModel.Message</p>
+    @foreach (var error in DomainErrorViewModel.Errors)
+    {
+        <p>@error.ToString()</p>
+    }
+</Alert>
+
+@code {
+    [Parameter, Required] public required DomainErrorViewModel DomainErrorViewModel { get; set; }
+
+    [Parameter, Required] public required AlertColor AlertColorInstance { get; set; }
+}

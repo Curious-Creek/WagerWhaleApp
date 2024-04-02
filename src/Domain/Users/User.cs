@@ -1,7 +1,3 @@
 ﻿namespace Domain.Users;
 
-public class User
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
+public record User(Guid Id, string DisplayName, string Email, string? FirstName, string? LastName);

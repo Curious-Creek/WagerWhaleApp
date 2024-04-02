@@ -1,4 +1,4 @@
-﻿namespace Blazor.ViewModels;
+﻿namespace Blazor.ViewModels.Competitions;
 
 public record CompetitionRow(string Name,
     decimal RewardPerStage,

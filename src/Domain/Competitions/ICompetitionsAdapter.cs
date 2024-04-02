@@ -1,5 +1,4 @@
-﻿using Blazor.Domain.Competitions;
-using Domain.Common;
+﻿using Domain.Common;
 using OneOf;
 
 namespace Domain.Competitions;

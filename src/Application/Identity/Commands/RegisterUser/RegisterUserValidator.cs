@@ -1,11 +1,10 @@
-﻿using Domain.Users;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Blazor.Validators;
+namespace Application.Identity.Commands.RegisterUser;
 
-public class UserValidator : AbstractValidator<User>
+public sealed class RegisterUserValidator : AbstractValidator<RegisterUserCommand>
 {
-    public UserValidator()
+    public RegisterUserValidator()
     {
         RuleFor(user => user.Password)
             .NotEmpty().WithMessage("Password cannot be empty.")

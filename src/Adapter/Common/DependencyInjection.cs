@@ -1,9 +1,9 @@
 ﻿using Adapter.Competitions;
-using Adapter.Users;
+using Adapter.Identity;
 using Ardalis.GuardClauses;
-using Domain.Common;
 using Domain.Competitions;
-using Domain.Users;
+using Domain.Identity;
+using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +22,16 @@ public static class DependencyInjection
         //services.AddHttpClient<IWhaleApiAdapter>(client => client.BaseAddress = new Uri(baseUrl));
         
         services.AddHttpClient<ICompetitionsAdapter, CompetitionsAdapter>(client => client.BaseAddress = new Uri(baseUrl));
-        services.AddHttpClient<IUsersAdapter, UsersAdapter>(client => client.BaseAddress = new Uri(baseUrl));
+        services.AddHttpClient<IIdentityAdapter, IdentityAdapter>(client => client.BaseAddress = new Uri(baseUrl));
+
+        AddMapsterConfig();
+        
         return services;
+    }
+
+    private static void AddMapsterConfig()
+    {
+        TypeAdapterConfig<IdentityTokenDto, IdentityToken>.NewConfig()
+            .MapWith(x => new IdentityToken(x.AccessToken, x.RefreshToken, DateTimeOffset.UtcNow.AddMilliseconds(x.ExpiresIn)));
     }
 }

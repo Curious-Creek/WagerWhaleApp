@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using Blazor.Domain.Competitions;
 using Domain.Common;
 using Domain.Competitions;
 using OneOf;

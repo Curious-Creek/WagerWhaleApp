@@ -1,4 +1,4 @@
-﻿namespace Blazor.Domain.Competitions;
+﻿namespace Domain.Competitions;
 
 public record Competition(
     string Name,
